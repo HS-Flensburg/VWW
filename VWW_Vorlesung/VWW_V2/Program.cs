@@ -8,13 +8,19 @@ namespace VWW_V2
 {
     class Program
     {
-        delegate bool Predicate(int i);
+        /// <summary>
+        /// checking numbers
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        delegate TResult Predicate<T, TResult>(T i);
+        delegate TResult Predicate2<T, T2, TResult>(T i, T2 j);
 
         static void Main(string[] args)
         {
-            Predicate myFunc = IsOdd;
+            Func<int, bool> myFunc = IsOdd;
 
-            ExecuteForOneToTen(IsOdd);
+            ExecuteForOneToTen(i => i % 2 != 0);
             ExecuteForOneToTen(IsEven);
 
             Console.WriteLine(myFunc(5));
@@ -22,7 +28,7 @@ namespace VWW_V2
             Console.ReadKey();
         }
 
-        static void ExecuteForOneToTen(Predicate f)
+        static void ExecuteForOneToTen(Predicate<int, bool> f)
         {
             for (int i = 1; i <= 10; i++)
                 Console.WriteLine(f(i));
