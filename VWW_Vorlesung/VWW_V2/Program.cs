@@ -19,11 +19,12 @@ namespace VWW_V2
         static void Main(string[] args)
         {
             Func<int, bool> myFunc = IsOdd;
+            Func<string> myFunc2 = () => "Hallo Flensburg";
+            Action<string, int> myFunc3 = (s, i) => Console.WriteLine(s.Substring(i));
+            Action<Func<string>> a = (s) => Console.WriteLine(s());
 
-            ExecuteForOneToTen(i => i % 2 != 0);
-            ExecuteForOneToTen(IsEven);
 
-            Console.WriteLine(myFunc(5));
+            a(myFunc2);
 
             Console.ReadKey();
         }
