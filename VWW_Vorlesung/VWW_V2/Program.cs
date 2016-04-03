@@ -18,30 +18,12 @@ namespace VWW_V2
 
         static void Main(string[] args)
         {
-            Func<int, bool> myFunc = IsOdd;
-            Func<string> myFunc2 = () => "Hallo Flensburg";
-            Action<string, int> myFunc3 = (s, i) => Console.WriteLine(s.Substring(i));
-            Action<Func<string>> a = (s) => Console.WriteLine(s());
+            var a = new [] { 1, 2, 3, 4, 5 , 6, 4};
 
-
-            a(myFunc2);
-
+            var x = a.Reverse().Where(i => i % 2 == 0).Skip(1).Distinct()
+                .Sum();
+            Console.WriteLine(a);
             Console.ReadKey();
-        }
-
-        static void ExecuteForOneToTen(Predicate<int, bool> f)
-        {
-            for (int i = 1; i <= 10; i++)
-                Console.WriteLine(f(i));
-        }
-
-        static bool IsOdd(int i)
-        {
-            return i % 2 != 0;
-        }
-        static bool IsEven(int i)
-        {
-            return i % 2 == 0;
         }
     }
 }
