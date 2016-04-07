@@ -7,6 +7,7 @@ namespace VWW_V3_WCF.Server
     {
         public bool IsAdult(User usr)
         {
+            Console.WriteLine("checking user :" + usr.Name);
             return usr.Age >= 18;
         }
     }
