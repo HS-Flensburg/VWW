@@ -19,11 +19,20 @@ namespace VWW_V2
         static void Main(string[] args)
         {
             var a = new [] { 1, 2, 3, 4, 5 , 6, 4};
+            
 
-            var x = a.Reverse().Where(i => i % 2 == 0).Skip(1).Distinct()
-                .Sum();
-            Console.WriteLine(a);
+            foreach (var item in myWhere(i => i % 2 == 0, a))
+                Console.WriteLine(item + ",");
             Console.ReadKey();
+        }
+
+        static IEnumerable<T> myWhere<T>(Func<T, bool> predicate, IEnumerable<T> original)
+        {
+            foreach (T item in original)
+            {
+                if (predicate(item))
+                    yield return item;
+            }
         }
     }
 }
