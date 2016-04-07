@@ -21,17 +21,19 @@ namespace VWW_V2
             var a = new [] { 1, 2, 3, 4, 5 , 6, 4};
             
 
-            foreach (var item in myWhere(i => i % 2 == 0, a))
+            foreach (var item in myUntil(i => i % 2 == 0, a))
                 Console.WriteLine(item + ",");
             Console.ReadKey();
         }
 
-        static IEnumerable<T> myWhere<T>(Func<T, bool> predicate, IEnumerable<T> original)
+        static IEnumerable<T> myUntil<T>(Func<T, bool> predicate, IEnumerable<T> original)
         {
             foreach (T item in original)
             {
-                if (predicate(item))
+                if (!predicate(item))
                     yield return item;
+                else
+                    yield break;
             }
         }
     }
