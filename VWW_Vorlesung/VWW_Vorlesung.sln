@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VWW_V3_WCF.Client", "VWW_V3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VWW_V3_WCF.Contracts", "VWW_V3_WCF.Contracts\VWW_V3_WCF.Contracts.csproj", "{5142C905-FEB0-4C7E-9927-7B56E32D4B66}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VWW_V4_WCF2", "VWW_V4_WCF2\VWW_V4_WCF2.csproj", "{F4A51522-8DCB-4314-8797-22A5291A9BC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VWW_V4_WCF2Client", "VWW_V4_WCF2Client\VWW_V4_WCF2Client.csproj", "{309F5AE7-246A-4DFD-837A-CBBBCC27CAC9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{5142C905-FEB0-4C7E-9927-7B56E32D4B66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5142C905-FEB0-4C7E-9927-7B56E32D4B66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5142C905-FEB0-4C7E-9927-7B56E32D4B66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4A51522-8DCB-4314-8797-22A5291A9BC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4A51522-8DCB-4314-8797-22A5291A9BC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4A51522-8DCB-4314-8797-22A5291A9BC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4A51522-8DCB-4314-8797-22A5291A9BC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{309F5AE7-246A-4DFD-837A-CBBBCC27CAC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{309F5AE7-246A-4DFD-837A-CBBBCC27CAC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{309F5AE7-246A-4DFD-837A-CBBBCC27CAC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{309F5AE7-246A-4DFD-837A-CBBBCC27CAC9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
