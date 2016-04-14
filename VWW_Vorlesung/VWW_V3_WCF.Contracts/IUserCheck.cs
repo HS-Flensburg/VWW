@@ -13,5 +13,9 @@ namespace VWW_V3_WCF.Contracts
         [OperationContract]
         [ServiceKnownType(typeof(User))]
         bool IsAdult(User usr);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(User))]
+        User getUser();
     }
 }

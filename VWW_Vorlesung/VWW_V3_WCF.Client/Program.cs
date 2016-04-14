@@ -30,6 +30,10 @@ namespace VWW_V3_WCF.Client
                 bool b = proxy.IsAdult(u);
 
                 Console.WriteLine(b);
+
+                var myuser = proxy.getUser();
+                Console.WriteLine(myuser.Name);
+                myuser.print("Hallo Flensburg");
                 Console.WriteLine("hit enter to exit");
                 Console.ReadKey();
             }

@@ -7,7 +7,7 @@ namespace VWW_V3_WCF.Contracts
     //[KnownType(typeof(Guid))] nur bei eigenen klassen
     public class User
     {
-        [DataMember] //optional
+        [DataMember]
         public string Name { get; set; }
         [DataMember]
         public int Age { get; set; }
