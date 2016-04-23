@@ -7,7 +7,7 @@ using VWW_V5_RemotingDemo.Contracts;
 
 namespace VWW_V5_RemotingDemo.Server
 {
-    class MyService : IMyService
+    class MyService : MarshalByRefObject, IMyService
     {
         public string GetHallo(string name)
         {
