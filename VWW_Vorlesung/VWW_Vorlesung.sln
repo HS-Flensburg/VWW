@@ -14,6 +14,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VWW_V4_WCF2", "VWW_V4_WCF2\VWW_V4_WCF2.csproj", "{F4A51522-8DCB-4314-8797-22A5291A9BC4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VWW_V4_WCF2Client", "VWW_V4_WCF2Client\VWW_V4_WCF2Client.csproj", "{309F5AE7-246A-4DFD-837A-CBBBCC27CAC9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F4A51522-8DCB-4314-8797-22A5291A9BC4} = {F4A51522-8DCB-4314-8797-22A5291A9BC4}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VWW_V4_WCF_ConsoleHost", "VWW_V4_WCF_ConsoleHost\VWW_V4_WCF_ConsoleHost.csproj", "{DBBD6DD0-B71E-44D4-ABA6-EB7BBFDC5660}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VWW_V4_WCF_ConsoleClient", "VWW_V4_WCF_ConsoleClient\VWW_V4_WCF_ConsoleClient.csproj", "{F590BC21-97B4-45EB-A71B-C022C69FB4B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +52,14 @@ Global
 		{309F5AE7-246A-4DFD-837A-CBBBCC27CAC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{309F5AE7-246A-4DFD-837A-CBBBCC27CAC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{309F5AE7-246A-4DFD-837A-CBBBCC27CAC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBBD6DD0-B71E-44D4-ABA6-EB7BBFDC5660}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBBD6DD0-B71E-44D4-ABA6-EB7BBFDC5660}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBBD6DD0-B71E-44D4-ABA6-EB7BBFDC5660}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBBD6DD0-B71E-44D4-ABA6-EB7BBFDC5660}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F590BC21-97B4-45EB-A71B-C022C69FB4B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F590BC21-97B4-45EB-A71B-C022C69FB4B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F590BC21-97B4-45EB-A71B-C022C69FB4B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F590BC21-97B4-45EB-A71B-C022C69FB4B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
