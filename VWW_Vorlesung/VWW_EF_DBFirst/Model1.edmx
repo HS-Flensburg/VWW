@@ -1,0 +1,1361 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LabminModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AnwesenheitSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LabEventsId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="UserId1" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="AssociatedCourse_Id" Type="int" Nullable="false" />
+          <Property Name="AssociatedUser_Id" Type="int" Nullable="false" />
+          <Property Name="Author_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Courses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="WithGroups" Type="bit" Nullable="false" />
+          <Property Name="Semester" Type="int" Nullable="false" />
+          <Property Name="Year" Type="smallint" Nullable="false" />
+          <Property Name="HasTestats" Type="bit" Nullable="false" />
+          <Property Name="HasExercises" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CourseUser">
+          <Key>
+            <PropertyRef Name="OwnerOf_Id" />
+            <PropertyRef Name="Owner_Id" />
+          </Key>
+          <Property Name="OwnerOf_Id" Type="int" Nullable="false" />
+          <Property Name="Owner_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CourseUser1">
+          <Key>
+            <PropertyRef Name="TutorOf_Id" />
+            <PropertyRef Name="Tutors_Id" />
+          </Key>
+          <Property Name="TutorOf_Id" Type="int" Nullable="false" />
+          <Property Name="Tutors_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExerciseResults">
+          <Key>
+            <PropertyRef Name="ExerciseTemplateId" />
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="ExerciseTemplateId" Type="int" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="Success" Type="bit" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+          <Property Name="LabEvent_Id" Type="int" Nullable="false" />
+          <Property Name="AuditorId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExerciseTemplates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="Text" Type="nvarchar(max)" />
+          <Property Name="Course_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LabEvents">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LabDate" Type="datetime" />
+          <Property Name="Lab_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LabGroups">
+          <Key>
+            <PropertyRef Name="GroupNumber" />
+            <PropertyRef Name="LabId" />
+          </Key>
+          <Property Name="GroupNumber" Type="int" Nullable="false" />
+          <Property Name="LabId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LabGroupUsers">
+          <Key>
+            <PropertyRef Name="LabGroups_GroupNumber" />
+            <PropertyRef Name="LabGroups_LabId" />
+            <PropertyRef Name="Students_Id" />
+          </Key>
+          <Property Name="LabGroups_GroupNumber" Type="int" Nullable="false" />
+          <Property Name="LabGroups_LabId" Type="int" Nullable="false" />
+          <Property Name="Students_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Labs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Room" Type="nvarchar(max)" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="BlockNumber" Type="tinyint" Nullable="false" />
+          <Property Name="DayOfWeek" Type="int" Nullable="false" />
+          <Property Name="Course_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Labs_LabWithGroups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Labs_LabWithoutGroups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LabWithoutGroupsUsers">
+          <Key>
+            <PropertyRef Name="LabsWithoutGroups_Id" />
+            <PropertyRef Name="Students_Id" />
+          </Key>
+          <Property Name="LabsWithoutGroups_Id" Type="int" Nullable="false" />
+          <Property Name="Students_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Testats">
+          <Key>
+            <PropertyRef Name="CourseId" />
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="LabEventId" />
+          </Key>
+          <Property Name="CourseId" Type="int" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="LabEventId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+          <Property Name="Success" Type="bit" Nullable="false" />
+          <Property Name="Auditor_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="StudIpName" Type="nvarchar" MaxLength="100" />
+          <Property Name="LabminUsername" Type="nvarchar(max)" />
+          <Property Name="StudIpMail" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_AnwesenheitUser">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="AnwesenheitSet" Type="Self.AnwesenheitSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnwesenheitSet">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnwesenheitUser1">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="AnwesenheitSet" Type="Self.AnwesenheitSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnwesenheitSet">
+              <PropertyRef Name="UserId1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseUser_Course">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
+          <End Role="CourseUser" Type="Self.CourseUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseUser">
+              <PropertyRef Name="OwnerOf_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseUser_User">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="CourseUser" Type="Self.CourseUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseUser">
+              <PropertyRef Name="Owner_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseUser1_Course">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
+          <End Role="CourseUser1" Type="Self.CourseUser1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseUser1">
+              <PropertyRef Name="TutorOf_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseUser1_User">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="CourseUser1" Type="Self.CourseUser1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseUser1">
+              <PropertyRef Name="Tutors_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Comments_dbo_Courses_AssociatedCourse_Id">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="AssociatedCourse_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Comments_dbo_Users_AssociatedUser_Id">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="AssociatedUser_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Comments_dbo_Users_Author_Id">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="Author_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ExerciseResults_dbo_ExerciseTemplates_ExerciseTemplateId">
+          <End Role="ExerciseTemplates" Type="Self.ExerciseTemplates" Multiplicity="1" />
+          <End Role="ExerciseResults" Type="Self.ExerciseResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExerciseTemplates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExerciseResults">
+              <PropertyRef Name="ExerciseTemplateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ExerciseResults_dbo_LabEvents_LabEvent_Id">
+          <End Role="LabEvents" Type="Self.LabEvents" Multiplicity="1" />
+          <End Role="ExerciseResults" Type="Self.ExerciseResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LabEvents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExerciseResults">
+              <PropertyRef Name="LabEvent_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ExerciseResults_dbo_Users_StudentId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="ExerciseResults" Type="Self.ExerciseResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExerciseResults">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ExerciseTemplates_dbo_Courses_Course_Id">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
+          <End Role="ExerciseTemplates" Type="Self.ExerciseTemplates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExerciseTemplates">
+              <PropertyRef Name="Course_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_LabEvents_dbo_Labs_Lab_Id">
+          <End Role="Labs" Type="Self.Labs" Multiplicity="1" />
+          <End Role="LabEvents" Type="Self.LabEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Labs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LabEvents">
+              <PropertyRef Name="Lab_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Labs_dbo_Courses_Course_Id">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
+          <End Role="Labs" Type="Self.Labs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Labs">
+              <PropertyRef Name="Course_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Testats_dbo_Courses_CourseId">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
+          <End Role="Testats" Type="Self.Testats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Testats">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Testats_dbo_LabEvents_LabEventId">
+          <End Role="LabEvents" Type="Self.LabEvents" Multiplicity="1" />
+          <End Role="Testats" Type="Self.Testats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LabEvents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Testats">
+              <PropertyRef Name="LabEventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Testats_dbo_Users_Auditor_Id">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Testats" Type="Self.Testats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Testats">
+              <PropertyRef Name="Auditor_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Testats_dbo_Users_StudentId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Testats" Type="Self.Testats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Testats">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExerciseResultsUser">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="ExerciseResults" Type="Self.ExerciseResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExerciseResults">
+              <PropertyRef Name="AuditorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LabEventsAnwesenheit">
+          <End Role="LabEvents" Type="Self.LabEvents" Multiplicity="1" />
+          <End Role="AnwesenheitSet" Type="Self.AnwesenheitSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LabEvents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnwesenheitSet">
+              <PropertyRef Name="LabEventsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LabGroupUsers_LabGroups">
+          <End Role="LabGroups" Type="Self.LabGroups" Multiplicity="1" />
+          <End Role="LabGroupUsers" Type="Self.LabGroupUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LabGroups">
+              <PropertyRef Name="GroupNumber" />
+              <PropertyRef Name="LabId" />
+            </Principal>
+            <Dependent Role="LabGroupUsers">
+              <PropertyRef Name="LabGroups_GroupNumber" />
+              <PropertyRef Name="LabGroups_LabId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LabGroupUsers_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="LabGroupUsers" Type="Self.LabGroupUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LabGroupUsers">
+              <PropertyRef Name="Students_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LabWithGroups_inherits_Lab">
+          <End Role="Labs" Type="Self.Labs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Labs_LabWithGroups" Type="Self.Labs_LabWithGroups" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Labs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Labs_LabWithGroups">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LabWithGroupsLabGroups">
+          <End Role="Labs_LabWithGroups" Type="Self.Labs_LabWithGroups" Multiplicity="1" />
+          <End Role="LabGroups" Type="Self.LabGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Labs_LabWithGroups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LabGroups">
+              <PropertyRef Name="LabId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LabWithoutGroups_inherits_Lab">
+          <End Role="Labs" Type="Self.Labs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Labs_LabWithoutGroups" Type="Self.Labs_LabWithoutGroups" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Labs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Labs_LabWithoutGroups">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LabWithoutGroupsUsers_LabWithoutGroups">
+          <End Role="Labs_LabWithoutGroups" Type="Self.Labs_LabWithoutGroups" Multiplicity="1" />
+          <End Role="LabWithoutGroupsUsers" Type="Self.LabWithoutGroupsUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Labs_LabWithoutGroups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LabWithoutGroupsUsers">
+              <PropertyRef Name="LabsWithoutGroups_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LabWithoutGroupsUsers_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="LabWithoutGroupsUsers" Type="Self.LabWithoutGroupsUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LabWithoutGroupsUsers">
+              <PropertyRef Name="Students_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LabminModelStoreContainer">
+          <EntitySet Name="AnwesenheitSet" EntityType="Self.AnwesenheitSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CourseUser" EntityType="Self.CourseUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CourseUser1" EntityType="Self.CourseUser1" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExerciseResults" EntityType="Self.ExerciseResults" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExerciseTemplates" EntityType="Self.ExerciseTemplates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LabEvents" EntityType="Self.LabEvents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LabGroups" EntityType="Self.LabGroups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LabGroupUsers" EntityType="Self.LabGroupUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Labs" EntityType="Self.Labs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Labs_LabWithGroups" EntityType="Self.Labs_LabWithGroups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Labs_LabWithoutGroups" EntityType="Self.Labs_LabWithoutGroups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LabWithoutGroupsUsers" EntityType="Self.LabWithoutGroupsUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Testats" EntityType="Self.Testats" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AnwesenheitUser" Association="Self.FK_AnwesenheitUser">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AnwesenheitSet" EntitySet="AnwesenheitSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnwesenheitUser1" Association="Self.FK_AnwesenheitUser1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AnwesenheitSet" EntitySet="AnwesenheitSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseUser_Course" Association="Self.FK_CourseUser_Course">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="CourseUser" EntitySet="CourseUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseUser_User" Association="Self.FK_CourseUser_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="CourseUser" EntitySet="CourseUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseUser1_Course" Association="Self.FK_CourseUser1_Course">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="CourseUser1" EntitySet="CourseUser1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseUser1_User" Association="Self.FK_CourseUser1_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="CourseUser1" EntitySet="CourseUser1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Comments_dbo_Courses_AssociatedCourse_Id" Association="Self.FK_dbo_Comments_dbo_Courses_AssociatedCourse_Id">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Comments_dbo_Users_AssociatedUser_Id" Association="Self.FK_dbo_Comments_dbo_Users_AssociatedUser_Id">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Comments_dbo_Users_Author_Id" Association="Self.FK_dbo_Comments_dbo_Users_Author_Id">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ExerciseResults_dbo_ExerciseTemplates_ExerciseTemplateId" Association="Self.FK_dbo_ExerciseResults_dbo_ExerciseTemplates_ExerciseTemplateId">
+            <End Role="ExerciseTemplates" EntitySet="ExerciseTemplates" />
+            <End Role="ExerciseResults" EntitySet="ExerciseResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ExerciseResults_dbo_LabEvents_LabEvent_Id" Association="Self.FK_dbo_ExerciseResults_dbo_LabEvents_LabEvent_Id">
+            <End Role="LabEvents" EntitySet="LabEvents" />
+            <End Role="ExerciseResults" EntitySet="ExerciseResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ExerciseResults_dbo_Users_StudentId" Association="Self.FK_dbo_ExerciseResults_dbo_Users_StudentId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ExerciseResults" EntitySet="ExerciseResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ExerciseTemplates_dbo_Courses_Course_Id" Association="Self.FK_dbo_ExerciseTemplates_dbo_Courses_Course_Id">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="ExerciseTemplates" EntitySet="ExerciseTemplates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_LabEvents_dbo_Labs_Lab_Id" Association="Self.FK_dbo_LabEvents_dbo_Labs_Lab_Id">
+            <End Role="Labs" EntitySet="Labs" />
+            <End Role="LabEvents" EntitySet="LabEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Labs_dbo_Courses_Course_Id" Association="Self.FK_dbo_Labs_dbo_Courses_Course_Id">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Labs" EntitySet="Labs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Testats_dbo_Courses_CourseId" Association="Self.FK_dbo_Testats_dbo_Courses_CourseId">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Testats" EntitySet="Testats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Testats_dbo_LabEvents_LabEventId" Association="Self.FK_dbo_Testats_dbo_LabEvents_LabEventId">
+            <End Role="LabEvents" EntitySet="LabEvents" />
+            <End Role="Testats" EntitySet="Testats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Testats_dbo_Users_Auditor_Id" Association="Self.FK_dbo_Testats_dbo_Users_Auditor_Id">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Testats" EntitySet="Testats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Testats_dbo_Users_StudentId" Association="Self.FK_dbo_Testats_dbo_Users_StudentId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Testats" EntitySet="Testats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExerciseResultsUser" Association="Self.FK_ExerciseResultsUser">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ExerciseResults" EntitySet="ExerciseResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LabEventsAnwesenheit" Association="Self.FK_LabEventsAnwesenheit">
+            <End Role="LabEvents" EntitySet="LabEvents" />
+            <End Role="AnwesenheitSet" EntitySet="AnwesenheitSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LabGroupUsers_LabGroups" Association="Self.FK_LabGroupUsers_LabGroups">
+            <End Role="LabGroups" EntitySet="LabGroups" />
+            <End Role="LabGroupUsers" EntitySet="LabGroupUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LabGroupUsers_Users" Association="Self.FK_LabGroupUsers_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="LabGroupUsers" EntitySet="LabGroupUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LabWithGroups_inherits_Lab" Association="Self.FK_LabWithGroups_inherits_Lab">
+            <End Role="Labs" EntitySet="Labs" />
+            <End Role="Labs_LabWithGroups" EntitySet="Labs_LabWithGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LabWithGroupsLabGroups" Association="Self.FK_LabWithGroupsLabGroups">
+            <End Role="Labs_LabWithGroups" EntitySet="Labs_LabWithGroups" />
+            <End Role="LabGroups" EntitySet="LabGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LabWithoutGroups_inherits_Lab" Association="Self.FK_LabWithoutGroups_inherits_Lab">
+            <End Role="Labs" EntitySet="Labs" />
+            <End Role="Labs_LabWithoutGroups" EntitySet="Labs_LabWithoutGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LabWithoutGroupsUsers_LabWithoutGroups" Association="Self.FK_LabWithoutGroupsUsers_LabWithoutGroups">
+            <End Role="Labs_LabWithoutGroups" EntitySet="Labs_LabWithoutGroups" />
+            <End Role="LabWithoutGroupsUsers" EntitySet="LabWithoutGroupsUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LabWithoutGroupsUsers_Users" Association="Self.FK_LabWithoutGroupsUsers_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="LabWithoutGroupsUsers" EntitySet="LabWithoutGroupsUsers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LabminModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AnwesenheitSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LabEventsId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="UserId1" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_AnwesenheitUser" FromRole="AnwesenheitSet" ToRole="Users" />
+          <NavigationProperty Name="Users1" Relationship="Self.FK_AnwesenheitUser1" FromRole="AnwesenheitSet" ToRole="Users" />
+          <NavigationProperty Name="LabEvents" Relationship="Self.FK_LabEventsAnwesenheit" FromRole="AnwesenheitSet" ToRole="LabEvents" />
+        </EntityType>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AssociatedCourse_Id" Type="Int32" Nullable="false" />
+          <Property Name="AssociatedUser_Id" Type="Int32" Nullable="false" />
+          <Property Name="Author_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Courses" Relationship="Self.FK_dbo_Comments_dbo_Courses_AssociatedCourse_Id" FromRole="Comments" ToRole="Courses" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_Comments_dbo_Users_AssociatedUser_Id" FromRole="Comments" ToRole="Users" />
+          <NavigationProperty Name="Users1" Relationship="Self.FK_dbo_Comments_dbo_Users_Author_Id" FromRole="Comments" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Courses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="WithGroups" Type="Boolean" Nullable="false" />
+          <Property Name="Semester" Type="Int32" Nullable="false" />
+          <Property Name="Year" Type="Int16" Nullable="false" />
+          <Property Name="HasTestats" Type="Boolean" Nullable="false" />
+          <Property Name="HasExercises" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_dbo_Comments_dbo_Courses_AssociatedCourse_Id" FromRole="Courses" ToRole="Comments" />
+          <NavigationProperty Name="ExerciseTemplates" Relationship="Self.FK_dbo_ExerciseTemplates_dbo_Courses_Course_Id" FromRole="Courses" ToRole="ExerciseTemplates" />
+          <NavigationProperty Name="Labs" Relationship="Self.FK_dbo_Labs_dbo_Courses_Course_Id" FromRole="Courses" ToRole="Labs" />
+          <NavigationProperty Name="Testats" Relationship="Self.FK_dbo_Testats_dbo_Courses_CourseId" FromRole="Courses" ToRole="Testats" />
+          <NavigationProperty Name="Users" Relationship="Self.CourseUser" FromRole="Courses" ToRole="Users" />
+          <NavigationProperty Name="Users1" Relationship="Self.CourseUser1" FromRole="Courses" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="ExerciseResults">
+          <Key>
+            <PropertyRef Name="ExerciseTemplateId" />
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="ExerciseTemplateId" Type="Int32" Nullable="false" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="Success" Type="Boolean" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LabEvent_Id" Type="Int32" Nullable="false" />
+          <Property Name="AuditorId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ExerciseTemplates" Relationship="Self.FK_dbo_ExerciseResults_dbo_ExerciseTemplates_ExerciseTemplateId" FromRole="ExerciseResults" ToRole="ExerciseTemplates" />
+          <NavigationProperty Name="LabEvents" Relationship="Self.FK_dbo_ExerciseResults_dbo_LabEvents_LabEvent_Id" FromRole="ExerciseResults" ToRole="LabEvents" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_ExerciseResults_dbo_Users_StudentId" FromRole="ExerciseResults" ToRole="Users" />
+          <NavigationProperty Name="Users1" Relationship="Self.FK_ExerciseResultsUser" FromRole="ExerciseResults" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="ExerciseTemplates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Course_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Courses" Relationship="Self.FK_dbo_ExerciseTemplates_dbo_Courses_Course_Id" FromRole="ExerciseTemplates" ToRole="Courses" />
+          <NavigationProperty Name="ExerciseResults" Relationship="Self.FK_dbo_ExerciseResults_dbo_ExerciseTemplates_ExerciseTemplateId" FromRole="ExerciseTemplates" ToRole="ExerciseResults" />
+        </EntityType>
+        <EntityType Name="LabEvents">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LabDate" Type="DateTime" Precision="3" />
+          <Property Name="Lab_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AnwesenheitSet" Relationship="Self.FK_LabEventsAnwesenheit" FromRole="LabEvents" ToRole="AnwesenheitSet" />
+          <NavigationProperty Name="ExerciseResults" Relationship="Self.FK_dbo_ExerciseResults_dbo_LabEvents_LabEvent_Id" FromRole="LabEvents" ToRole="ExerciseResults" />
+          <NavigationProperty Name="Labs" Relationship="Self.FK_dbo_LabEvents_dbo_Labs_Lab_Id" FromRole="LabEvents" ToRole="Labs" />
+          <NavigationProperty Name="Testats" Relationship="Self.FK_dbo_Testats_dbo_LabEvents_LabEventId" FromRole="LabEvents" ToRole="Testats" />
+        </EntityType>
+        <EntityType Name="LabGroups">
+          <Key>
+            <PropertyRef Name="GroupNumber" />
+            <PropertyRef Name="LabId" />
+          </Key>
+          <Property Name="GroupNumber" Type="Int32" Nullable="false" />
+          <Property Name="LabId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Labs_LabWithGroups" Relationship="Self.FK_LabWithGroupsLabGroups" FromRole="LabGroups" ToRole="Labs_LabWithGroups" />
+          <NavigationProperty Name="Users" Relationship="Self.LabGroupUsers" FromRole="LabGroups" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Labs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Room" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BlockNumber" Type="Byte" Nullable="false" />
+          <Property Name="DayOfWeek" Type="Int32" Nullable="false" />
+          <Property Name="Course_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Courses" Relationship="Self.FK_dbo_Labs_dbo_Courses_Course_Id" FromRole="Labs" ToRole="Courses" />
+          <NavigationProperty Name="LabEvents" Relationship="Self.FK_dbo_LabEvents_dbo_Labs_Lab_Id" FromRole="Labs" ToRole="LabEvents" />
+          <NavigationProperty Name="Labs_LabWithGroups" Relationship="Self.FK_LabWithGroups_inherits_Lab" FromRole="Labs" ToRole="Labs_LabWithGroups" />
+          <NavigationProperty Name="Labs_LabWithoutGroups" Relationship="Self.FK_LabWithoutGroups_inherits_Lab" FromRole="Labs" ToRole="Labs_LabWithoutGroups" />
+        </EntityType>
+        <EntityType Name="Labs_LabWithGroups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="LabGroups" Relationship="Self.FK_LabWithGroupsLabGroups" FromRole="Labs_LabWithGroups" ToRole="LabGroups" />
+          <NavigationProperty Name="Labs" Relationship="Self.FK_LabWithGroups_inherits_Lab" FromRole="Labs_LabWithGroups" ToRole="Labs" />
+        </EntityType>
+        <EntityType Name="Labs_LabWithoutGroups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Labs" Relationship="Self.FK_LabWithoutGroups_inherits_Lab" FromRole="Labs_LabWithoutGroups" ToRole="Labs" />
+          <NavigationProperty Name="Users" Relationship="Self.LabWithoutGroupsUsers" FromRole="Labs_LabWithoutGroups" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Testats">
+          <Key>
+            <PropertyRef Name="CourseId" />
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="LabEventId" />
+          </Key>
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="LabEventId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Success" Type="Boolean" Nullable="false" />
+          <Property Name="Auditor_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Courses" Relationship="Self.FK_dbo_Testats_dbo_Courses_CourseId" FromRole="Testats" ToRole="Courses" />
+          <NavigationProperty Name="LabEvents" Relationship="Self.FK_dbo_Testats_dbo_LabEvents_LabEventId" FromRole="Testats" ToRole="LabEvents" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_Testats_dbo_Users_Auditor_Id" FromRole="Testats" ToRole="Users" />
+          <NavigationProperty Name="Users1" Relationship="Self.FK_dbo_Testats_dbo_Users_StudentId" FromRole="Testats" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StudIpName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LabminUsername" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StudIpMail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AnwesenheitSet" Relationship="Self.FK_AnwesenheitUser" FromRole="Users" ToRole="AnwesenheitSet" />
+          <NavigationProperty Name="AnwesenheitSet1" Relationship="Self.FK_AnwesenheitUser1" FromRole="Users" ToRole="AnwesenheitSet" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_dbo_Comments_dbo_Users_AssociatedUser_Id" FromRole="Users" ToRole="Comments" />
+          <NavigationProperty Name="Comments1" Relationship="Self.FK_dbo_Comments_dbo_Users_Author_Id" FromRole="Users" ToRole="Comments" />
+          <NavigationProperty Name="ExerciseResults" Relationship="Self.FK_dbo_ExerciseResults_dbo_Users_StudentId" FromRole="Users" ToRole="ExerciseResults" />
+          <NavigationProperty Name="ExerciseResults1" Relationship="Self.FK_ExerciseResultsUser" FromRole="Users" ToRole="ExerciseResults" />
+          <NavigationProperty Name="Testats" Relationship="Self.FK_dbo_Testats_dbo_Users_Auditor_Id" FromRole="Users" ToRole="Testats" />
+          <NavigationProperty Name="Testats1" Relationship="Self.FK_dbo_Testats_dbo_Users_StudentId" FromRole="Users" ToRole="Testats" />
+          <NavigationProperty Name="Courses" Relationship="Self.CourseUser" FromRole="Users" ToRole="Courses" />
+          <NavigationProperty Name="Courses1" Relationship="Self.CourseUser1" FromRole="Users" ToRole="Courses" />
+          <NavigationProperty Name="LabGroups" Relationship="Self.LabGroupUsers" FromRole="Users" ToRole="LabGroups" />
+          <NavigationProperty Name="Labs_LabWithoutGroups" Relationship="Self.LabWithoutGroupsUsers" FromRole="Users" ToRole="Labs_LabWithoutGroups" />
+        </EntityType>
+        <Association Name="FK_AnwesenheitUser">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="AnwesenheitSet" Type="Self.AnwesenheitSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnwesenheitSet">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnwesenheitUser1">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="AnwesenheitSet" Type="Self.AnwesenheitSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnwesenheitSet">
+              <PropertyRef Name="UserId1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LabEventsAnwesenheit">
+          <End Role="LabEvents" Type="Self.LabEvents" Multiplicity="1" />
+          <End Role="AnwesenheitSet" Type="Self.AnwesenheitSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LabEvents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnwesenheitSet">
+              <PropertyRef Name="LabEventsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Comments_dbo_Courses_AssociatedCourse_Id">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="AssociatedCourse_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Comments_dbo_Users_AssociatedUser_Id">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="AssociatedUser_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Comments_dbo_Users_Author_Id">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="Author_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ExerciseTemplates_dbo_Courses_Course_Id">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
+          <End Role="ExerciseTemplates" Type="Self.ExerciseTemplates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExerciseTemplates">
+              <PropertyRef Name="Course_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Labs_dbo_Courses_Course_Id">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
+          <End Role="Labs" Type="Self.Labs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Labs">
+              <PropertyRef Name="Course_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Testats_dbo_Courses_CourseId">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
+          <End Role="Testats" Type="Self.Testats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Testats">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ExerciseResults_dbo_ExerciseTemplates_ExerciseTemplateId">
+          <End Role="ExerciseTemplates" Type="Self.ExerciseTemplates" Multiplicity="1" />
+          <End Role="ExerciseResults" Type="Self.ExerciseResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExerciseTemplates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExerciseResults">
+              <PropertyRef Name="ExerciseTemplateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ExerciseResults_dbo_LabEvents_LabEvent_Id">
+          <End Role="LabEvents" Type="Self.LabEvents" Multiplicity="1" />
+          <End Role="ExerciseResults" Type="Self.ExerciseResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LabEvents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExerciseResults">
+              <PropertyRef Name="LabEvent_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ExerciseResults_dbo_Users_StudentId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="ExerciseResults" Type="Self.ExerciseResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExerciseResults">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExerciseResultsUser">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="ExerciseResults" Type="Self.ExerciseResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExerciseResults">
+              <PropertyRef Name="AuditorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_LabEvents_dbo_Labs_Lab_Id">
+          <End Role="Labs" Type="Self.Labs" Multiplicity="1" />
+          <End Role="LabEvents" Type="Self.LabEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Labs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LabEvents">
+              <PropertyRef Name="Lab_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Testats_dbo_LabEvents_LabEventId">
+          <End Role="LabEvents" Type="Self.LabEvents" Multiplicity="1" />
+          <End Role="Testats" Type="Self.Testats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LabEvents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Testats">
+              <PropertyRef Name="LabEventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LabWithGroupsLabGroups">
+          <End Role="Labs_LabWithGroups" Type="Self.Labs_LabWithGroups" Multiplicity="1" />
+          <End Role="LabGroups" Type="Self.LabGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Labs_LabWithGroups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LabGroups">
+              <PropertyRef Name="LabId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LabWithGroups_inherits_Lab">
+          <End Role="Labs" Type="Self.Labs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Labs_LabWithGroups" Type="Self.Labs_LabWithGroups" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Labs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Labs_LabWithGroups">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LabWithoutGroups_inherits_Lab">
+          <End Role="Labs" Type="Self.Labs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Labs_LabWithoutGroups" Type="Self.Labs_LabWithoutGroups" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Labs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Labs_LabWithoutGroups">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Testats_dbo_Users_Auditor_Id">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Testats" Type="Self.Testats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Testats">
+              <PropertyRef Name="Auditor_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Testats_dbo_Users_StudentId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Testats" Type="Self.Testats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Testats">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CourseUser">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+        </Association>
+        <Association Name="CourseUser1">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+        </Association>
+        <Association Name="LabGroupUsers">
+          <End Role="LabGroups" Type="Self.LabGroups" Multiplicity="*" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+        </Association>
+        <Association Name="LabWithoutGroupsUsers">
+          <End Role="Labs_LabWithoutGroups" Type="Self.Labs_LabWithoutGroups" Multiplicity="*" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="LabminEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AnwesenheitSet" EntityType="Self.AnwesenheitSet" />
+          <EntitySet Name="Comments" EntityType="Self.Comments" />
+          <EntitySet Name="Courses" EntityType="Self.Courses" />
+          <EntitySet Name="ExerciseResults" EntityType="Self.ExerciseResults" />
+          <EntitySet Name="ExerciseTemplates" EntityType="Self.ExerciseTemplates" />
+          <EntitySet Name="LabEvents" EntityType="Self.LabEvents" />
+          <EntitySet Name="LabGroups" EntityType="Self.LabGroups" />
+          <EntitySet Name="Labs" EntityType="Self.Labs" />
+          <EntitySet Name="Labs_LabWithGroups" EntityType="Self.Labs_LabWithGroups" />
+          <EntitySet Name="Labs_LabWithoutGroups" EntityType="Self.Labs_LabWithoutGroups" />
+          <EntitySet Name="Testats" EntityType="Self.Testats" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_AnwesenheitUser" Association="Self.FK_AnwesenheitUser">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AnwesenheitSet" EntitySet="AnwesenheitSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnwesenheitUser1" Association="Self.FK_AnwesenheitUser1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AnwesenheitSet" EntitySet="AnwesenheitSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LabEventsAnwesenheit" Association="Self.FK_LabEventsAnwesenheit">
+            <End Role="LabEvents" EntitySet="LabEvents" />
+            <End Role="AnwesenheitSet" EntitySet="AnwesenheitSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Comments_dbo_Courses_AssociatedCourse_Id" Association="Self.FK_dbo_Comments_dbo_Courses_AssociatedCourse_Id">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Comments_dbo_Users_AssociatedUser_Id" Association="Self.FK_dbo_Comments_dbo_Users_AssociatedUser_Id">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Comments_dbo_Users_Author_Id" Association="Self.FK_dbo_Comments_dbo_Users_Author_Id">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ExerciseTemplates_dbo_Courses_Course_Id" Association="Self.FK_dbo_ExerciseTemplates_dbo_Courses_Course_Id">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="ExerciseTemplates" EntitySet="ExerciseTemplates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Labs_dbo_Courses_Course_Id" Association="Self.FK_dbo_Labs_dbo_Courses_Course_Id">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Labs" EntitySet="Labs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Testats_dbo_Courses_CourseId" Association="Self.FK_dbo_Testats_dbo_Courses_CourseId">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Testats" EntitySet="Testats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ExerciseResults_dbo_ExerciseTemplates_ExerciseTemplateId" Association="Self.FK_dbo_ExerciseResults_dbo_ExerciseTemplates_ExerciseTemplateId">
+            <End Role="ExerciseTemplates" EntitySet="ExerciseTemplates" />
+            <End Role="ExerciseResults" EntitySet="ExerciseResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ExerciseResults_dbo_LabEvents_LabEvent_Id" Association="Self.FK_dbo_ExerciseResults_dbo_LabEvents_LabEvent_Id">
+            <End Role="LabEvents" EntitySet="LabEvents" />
+            <End Role="ExerciseResults" EntitySet="ExerciseResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ExerciseResults_dbo_Users_StudentId" Association="Self.FK_dbo_ExerciseResults_dbo_Users_StudentId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ExerciseResults" EntitySet="ExerciseResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExerciseResultsUser" Association="Self.FK_ExerciseResultsUser">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ExerciseResults" EntitySet="ExerciseResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_LabEvents_dbo_Labs_Lab_Id" Association="Self.FK_dbo_LabEvents_dbo_Labs_Lab_Id">
+            <End Role="Labs" EntitySet="Labs" />
+            <End Role="LabEvents" EntitySet="LabEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Testats_dbo_LabEvents_LabEventId" Association="Self.FK_dbo_Testats_dbo_LabEvents_LabEventId">
+            <End Role="LabEvents" EntitySet="LabEvents" />
+            <End Role="Testats" EntitySet="Testats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LabWithGroupsLabGroups" Association="Self.FK_LabWithGroupsLabGroups">
+            <End Role="Labs_LabWithGroups" EntitySet="Labs_LabWithGroups" />
+            <End Role="LabGroups" EntitySet="LabGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LabWithGroups_inherits_Lab" Association="Self.FK_LabWithGroups_inherits_Lab">
+            <End Role="Labs" EntitySet="Labs" />
+            <End Role="Labs_LabWithGroups" EntitySet="Labs_LabWithGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LabWithoutGroups_inherits_Lab" Association="Self.FK_LabWithoutGroups_inherits_Lab">
+            <End Role="Labs" EntitySet="Labs" />
+            <End Role="Labs_LabWithoutGroups" EntitySet="Labs_LabWithoutGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Testats_dbo_Users_Auditor_Id" Association="Self.FK_dbo_Testats_dbo_Users_Auditor_Id">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Testats" EntitySet="Testats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Testats_dbo_Users_StudentId" Association="Self.FK_dbo_Testats_dbo_Users_StudentId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Testats" EntitySet="Testats" />
+          </AssociationSet>
+          <AssociationSet Name="CourseUser" Association="Self.CourseUser">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="CourseUser1" Association="Self.CourseUser1">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="LabGroupUsers" Association="Self.LabGroupUsers">
+            <End Role="LabGroups" EntitySet="LabGroups" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="LabWithoutGroupsUsers" Association="Self.LabWithoutGroupsUsers">
+            <End Role="Labs_LabWithoutGroups" EntitySet="Labs_LabWithoutGroups" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LabminModelStoreContainer" CdmEntityContainer="LabminEntities">
+          <EntitySetMapping Name="AnwesenheitSet">
+            <EntityTypeMapping TypeName="LabminModel.AnwesenheitSet">
+              <MappingFragment StoreEntitySet="AnwesenheitSet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LabEventsId" ColumnName="LabEventsId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserId1" ColumnName="UserId1" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="LabminModel.Comments">
+              <MappingFragment StoreEntitySet="Comments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="AssociatedCourse_Id" ColumnName="AssociatedCourse_Id" />
+                <ScalarProperty Name="AssociatedUser_Id" ColumnName="AssociatedUser_Id" />
+                <ScalarProperty Name="Author_Id" ColumnName="Author_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="LabminModel.Courses">
+              <MappingFragment StoreEntitySet="Courses">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="WithGroups" ColumnName="WithGroups" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="HasTestats" ColumnName="HasTestats" />
+                <ScalarProperty Name="HasExercises" ColumnName="HasExercises" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExerciseResults">
+            <EntityTypeMapping TypeName="LabminModel.ExerciseResults">
+              <MappingFragment StoreEntitySet="ExerciseResults">
+                <ScalarProperty Name="ExerciseTemplateId" ColumnName="ExerciseTemplateId" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Success" ColumnName="Success" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="LabEvent_Id" ColumnName="LabEvent_Id" />
+                <ScalarProperty Name="AuditorId" ColumnName="AuditorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExerciseTemplates">
+            <EntityTypeMapping TypeName="LabminModel.ExerciseTemplates">
+              <MappingFragment StoreEntitySet="ExerciseTemplates">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Course_Id" ColumnName="Course_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LabEvents">
+            <EntityTypeMapping TypeName="LabminModel.LabEvents">
+              <MappingFragment StoreEntitySet="LabEvents">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LabDate" ColumnName="LabDate" />
+                <ScalarProperty Name="Lab_Id" ColumnName="Lab_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LabGroups">
+            <EntityTypeMapping TypeName="LabminModel.LabGroups">
+              <MappingFragment StoreEntitySet="LabGroups">
+                <ScalarProperty Name="GroupNumber" ColumnName="GroupNumber" />
+                <ScalarProperty Name="LabId" ColumnName="LabId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Labs">
+            <EntityTypeMapping TypeName="LabminModel.Labs">
+              <MappingFragment StoreEntitySet="Labs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Room" ColumnName="Room" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BlockNumber" ColumnName="BlockNumber" />
+                <ScalarProperty Name="DayOfWeek" ColumnName="DayOfWeek" />
+                <ScalarProperty Name="Course_Id" ColumnName="Course_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Labs_LabWithGroups">
+            <EntityTypeMapping TypeName="LabminModel.Labs_LabWithGroups">
+              <MappingFragment StoreEntitySet="Labs_LabWithGroups">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Labs_LabWithoutGroups">
+            <EntityTypeMapping TypeName="LabminModel.Labs_LabWithoutGroups">
+              <MappingFragment StoreEntitySet="Labs_LabWithoutGroups">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Testats">
+            <EntityTypeMapping TypeName="LabminModel.Testats">
+              <MappingFragment StoreEntitySet="Testats">
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="LabEventId" ColumnName="LabEventId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Success" ColumnName="Success" />
+                <ScalarProperty Name="Auditor_Id" ColumnName="Auditor_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="LabminModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StudIpName" ColumnName="StudIpName" />
+                <ScalarProperty Name="LabminUsername" ColumnName="LabminUsername" />
+                <ScalarProperty Name="StudIpMail" ColumnName="StudIpMail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="CourseUser" TypeName="LabminModel.CourseUser" StoreEntitySet="CourseUser">
+            <EndProperty Name="Courses">
+              <ScalarProperty Name="Id" ColumnName="OwnerOf_Id" />
+            </EndProperty>
+            <EndProperty Name="Users">
+              <ScalarProperty Name="Id" ColumnName="Owner_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="CourseUser1" TypeName="LabminModel.CourseUser1" StoreEntitySet="CourseUser1">
+            <EndProperty Name="Courses">
+              <ScalarProperty Name="Id" ColumnName="TutorOf_Id" />
+            </EndProperty>
+            <EndProperty Name="Users">
+              <ScalarProperty Name="Id" ColumnName="Tutors_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="LabGroupUsers" TypeName="LabminModel.LabGroupUsers" StoreEntitySet="LabGroupUsers">
+            <EndProperty Name="LabGroups">
+              <ScalarProperty Name="GroupNumber" ColumnName="LabGroups_GroupNumber" />
+              <ScalarProperty Name="LabId" ColumnName="LabGroups_LabId" />
+            </EndProperty>
+            <EndProperty Name="Users">
+              <ScalarProperty Name="Id" ColumnName="Students_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="LabWithoutGroupsUsers" TypeName="LabminModel.LabWithoutGroupsUsers" StoreEntitySet="LabWithoutGroupsUsers">
+            <EndProperty Name="Labs_LabWithoutGroups">
+              <ScalarProperty Name="Id" ColumnName="LabsWithoutGroups_Id" />
+            </EndProperty>
+            <EndProperty Name="Users">
+              <ScalarProperty Name="Id" ColumnName="Students_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Kein" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Model1StoreContainer">
+    <EntitySet Name="MonitorSet" EntityType="Model1.Store.MonitorSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HerstellerSet" EntityType="Model1.Store.HerstellerSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="HerstellerMonitor" Association="Model1.Store.HerstellerMonitor">
+      <End Role="Hersteller" EntitySet="HerstellerSet" />
+      <End Role="Monitor" EntitySet="MonitorSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="MonitorSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="HerstellerId" Type="int" Nullable="false" />
+    <Property Name="Preis_Preis" Type="float" Nullable="false" />
+    <Property Name="Preis_Währung" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HerstellerSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="HerstellerMonitor">
+    <End Role="Hersteller" Type="Model1.Store.HerstellerSet" Multiplicity="1" />
+    <End Role="Monitor" Type="Model1.Store.MonitorSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hersteller">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Monitor">
+        <PropertyRef Name="HerstellerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MonitorSet" EntityType="Model1.Monitor" />
+          <EntitySet Name="HerstellerSet" EntityType="Model1.Hersteller" />
+          <AssociationSet Name="HerstellerMonitor" Association="Model1.HerstellerMonitor">
+            <End Role="Hersteller" EntitySet="HerstellerSet" />
+            <End Role="Monitor" EntitySet="MonitorSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Monitor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Hersteller" Relationship="Model1.HerstellerMonitor" FromRole="Monitor" ToRole="Hersteller" />
+          <Property Name="HerstellerId" Type="Int32" Nullable="false" />
+          <Property Name="Preis" Type="Model1.Waehrung" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hersteller">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Monitor" Relationship="Model1.HerstellerMonitor" FromRole="Hersteller" ToRole="Monitor" />
+        </EntityType>
+        <Association Name="HerstellerMonitor">
+          <End Type="Model1.Hersteller" Role="Hersteller" Multiplicity="1" />
+          <End Type="Model1.Monitor" Role="Monitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hersteller">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Monitor">
+              <PropertyRef Name="HerstellerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="Waehrung" >
+          <Property Type="Double" Name="Preis" Nullable="false" />
+          <Property Type="String" Name="Währung" Nullable="false" />
+        </ComplexType>
+        <EnumType Name="Währungstyp">
+          <Member Name="USD" />
+          <Member Name="Euro" />
+          <Member Name="Yen" />
+        </EnumType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="Model1Container">
+    <EntitySetMapping Name="MonitorSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Monitor)">
+        <MappingFragment StoreEntitySet="MonitorSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="HerstellerId" ColumnName="HerstellerId" />
+          <ComplexProperty Name="Preis" TypeName="Model1.Waehrung">
+            <ScalarProperty Name="Preis" ColumnName="Preis_Preis" />
+            <ScalarProperty Name="Währung" ColumnName="Preis_Währung" />
+          </ComplexProperty>
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HerstellerSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Hersteller)">
+        <MappingFragment StoreEntitySet="HerstellerSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Kein" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

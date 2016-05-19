@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c7e1e6563672452fa90916c3adc71f5c" Name="Diagram1">
+        <EntityTypeShape EntityType="LabminModel.AnwesenheitSet" Width="1.5" PointX="10.5" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LabminModel.Comments" Width="1.5" PointX="6" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LabminModel.Courses" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LabminModel.ExerciseResults" Width="1.5" PointX="8.5" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LabminModel.ExerciseTemplates" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LabminModel.LabEvents" Width="1.5" PointX="5.25" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LabminModel.LabGroups" Width="1.5" PointX="7.5" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LabminModel.Labs" Width="1.5" PointX="3" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LabminModel.Labs_LabWithGroups" Width="1.5" PointX="5.25" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LabminModel.Labs_LabWithoutGroups" Width="1.5" PointX="5.25" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LabminModel.Testats" Width="1.5" PointX="8.5" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LabminModel.Users" Width="1.5" PointX="10.75" PointY="10.5" IsExpanded="true" />
+        <AssociationConnector Association="LabminModel.FK_AnwesenheitUser" ManuallyRouted="false" />
+        <AssociationConnector Association="LabminModel.FK_AnwesenheitUser1" ManuallyRouted="false" />
+        <AssociationConnector Association="LabminModel.FK_LabEventsAnwesenheit" ManuallyRouted="false" />
+        <AssociationConnector Association="LabminModel.FK_dbo_Comments_dbo_Courses_AssociatedCourse_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="LabminModel.FK_dbo_Comments_dbo_Users_AssociatedUser_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="LabminModel.FK_dbo_Comments_dbo_Users_Author_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="LabminModel.FK_dbo_ExerciseTemplates_dbo_Courses_Course_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="LabminModel.FK_dbo_Labs_dbo_Courses_Course_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="LabminModel.FK_dbo_Testats_dbo_Courses_CourseId" ManuallyRouted="false" />
+        <AssociationConnector Association="LabminModel.FK_dbo_ExerciseResults_dbo_ExerciseTemplates_ExerciseTemplateId" ManuallyRouted="false" />
+        <AssociationConnector Association="LabminModel.FK_dbo_ExerciseResults_dbo_LabEvents_LabEvent_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="LabminModel.FK_dbo_ExerciseResults_dbo_Users_StudentId" ManuallyRouted="false" />
+        <AssociationConnector Association="LabminModel.FK_ExerciseResultsUser" ManuallyRouted="false" />
+        <AssociationConnector Association="LabminModel.FK_dbo_LabEvents_dbo_Labs_Lab_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="LabminModel.FK_dbo_Testats_dbo_LabEvents_LabEventId" ManuallyRouted="false" />
+        <AssociationConnector Association="LabminModel.FK_LabWithGroupsLabGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="LabminModel.FK_LabWithGroups_inherits_Lab" ManuallyRouted="false" />
+        <AssociationConnector Association="LabminModel.FK_LabWithoutGroups_inherits_Lab" ManuallyRouted="false" />
+        <AssociationConnector Association="LabminModel.FK_dbo_Testats_dbo_Users_Auditor_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="LabminModel.FK_dbo_Testats_dbo_Users_StudentId" ManuallyRouted="false" />
+        <AssociationConnector Association="LabminModel.CourseUser" ManuallyRouted="false" />
+        <AssociationConnector Association="LabminModel.CourseUser1" ManuallyRouted="false" />
+        <AssociationConnector Association="LabminModel.LabGroupUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="LabminModel.LabWithoutGroupsUsers" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
